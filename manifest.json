@@ -1,0 +1,9 @@
+{
+	"name":        "Moral Arbiter",
+	"version":     "1.0",
+	"description": "Flags imdb.com movie pages based on plot keywords",
+
+	"icons": {
+		"128": "icon.png"
+	}
+}
