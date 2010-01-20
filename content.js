@@ -1,5 +1,14 @@
 var keywordlist;
 var keywordelem = document.getElementById("tn15plotkeywords");
+
+chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
+	if (request.action == "GetKeywords") {
+		sendResponse({keywords: keywordlist});
+	} else {
+		sendResponse({});
+	}
+});
+
 if (keywordelem != null) {
 	if (keywordelem.nextElementSibling != null) {
 			var xhr = new XMLHttpRequest();

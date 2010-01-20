@@ -7,6 +7,29 @@
 		if(message.message == "ProcessKeywords") {
 			console.log("ProcessKeywords");
 			console.log(message.data);
+
+			var pos = [];
+			var neg = [];
+			for (var i=0; i < message.data.length; i++) {	
+				if (NudityKeywords.Female.indexOf(message.data[i]) >= 0) {
+					pos.push(message.data[i]);
+				} else if (NudityKeywords.Male.indexOf(message.data[i]) >= 0) {
+					neg.push(message.data[i]);
+				}
+			}
+			if (pos.length > 0 || neg.length > 0) {
+				if (pos.length == neg.length) {
+					chrome.pageAction.show(sender.tab.id);
+				} else if (pos.length > neg.length) {
+					chrome.pageAction.setIcon({tabId:sender.tab.id,path:chrome.extension.getURL("icons/balance--plus.png")});
+					chrome.pageAction.setTitle({tabId:sender.tab.id,title:'Positive nudity balance'});
+					chrome.pageAction.show(sender.tab.id);
+				} else if (neg.length > pos.length) {
+					chrome.pageAction.setIcon({tabId:sender.tab.id,path:chrome.extension.getURL("icons/balance--minus.png")});
+					chrome.pageAction.setTitle({tabId:sender.tab.id,title:'Negative nudity balance'});
+					chrome.pageAction.show(sender.tab.id);
+				}
+			}
 		} else {
 			console.log("Unknown message type");
 			console.log(message);

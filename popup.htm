@@ -1,0 +1,53 @@
+<html>
+<head>
+<style>
+	body { width:300px; }
+	.heading { white-space: nowrap;}
+	.content { white-space: nowrap;}
+	.keyword.plus {color:green;}
+	.keyword.minus {color:red;}
+</style>
+<script src="keywordcategories.js"></script>
+<script>
+
+function main() {
+	chrome.tabs.getSelected(null, function(tab) {
+		chrome.tabs.sendRequest(tab.id, {action: "GetKeywords"}, function(response) {
+		
+			var content = document.getElementById("content");
+			var pos = [];
+			var neg = [];
+			for (var i=0; i < response.keywords.length; i++) {	
+				if (NudityKeywords.Female.indexOf(response.keywords[i]) >= 0) {
+					pos.push(response.keywords[i]);
+				} else if (NudityKeywords.Male.indexOf(response.keywords[i]) >= 0) {
+					neg.push(response.keywords[i]);
+				}
+			}
+
+			for (var i=0; i < pos.length; i++) {
+				var ele = document.createElement("DIV");
+				ele.className = "keyword plus";
+				ele.innerText = pos[i];
+				content.appendChild(ele);
+			}
+
+			for (var i=0; i < neg.length; i++) {
+				var ele = document.createElement("DIV");
+				ele.className = "keyword minus";
+				ele.innerText = neg[i];
+				content.appendChild(ele);
+			}
+			
+		});
+	});
+}
+
+</script>
+</head>
+<body onload="javascript:main()">
+	<div id="content">
+	<h4 id="heading" class="heading">Moral Arbiter</h4>
+	</div>
+</body>
+</html>
