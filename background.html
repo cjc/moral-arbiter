@@ -1,0 +1,22 @@
+<html>
+	<head>
+	<script src='jquery-1.4.min.js'></script>
+	<script src='keywordcategories.js'></script>
+	<script type="text/javascript">
+	chrome.extension.onRequest.addListener(function(message, sender, sendResponse){
+		if(message.message == "ProcessKeywords") {
+			console.log("ProcessKeywords");
+			console.log(message.data);
+		} else {
+			console.log("Unknown message type");
+			console.log(message);
+		}
+	});
+	</script>
+	</head>
+	<body>
+		<script type="text/javascript">
+			console.log("Starting Moral Arbiter");
+		</script>
+	</body>
+</html>

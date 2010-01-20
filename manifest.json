@@ -5,5 +5,25 @@
 
 	"icons": {
 		"128": "icon.png"
-	}
+	},
+
+	"page_action": {
+		"default_title": "Moral Arbiter",
+		"default_icon": "icons/balance.png",
+		"popup":        "popup.htm"
+	},
+ 
+	"content_scripts": [
+		{
+			"matches": ["http://www.imdb.com/title/*/"],
+			"js":      ["jquery-1.4.min.js","content.js"]
+		}
+	], 
+
+	"background_page": "background.html",
+
+	"permissions": [
+		"http://www.imdb.com/",
+		"tabs"
+	]	
 }
